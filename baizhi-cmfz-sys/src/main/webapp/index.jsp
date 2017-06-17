@@ -3,7 +3,12 @@
 
 <html>
 <head>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/back/easyui/js/jquery.min.js"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back/easyui/css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back/easyui/css/themes/icon.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/back/easyui/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/back/easyui/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/back/easyui/js/form.validator.rules.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/back/easyui/js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/back/editor/kindeditor-common.js"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/back/editor/kindeditor.js"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/back/editor/lang/zh-CN.js"/>
