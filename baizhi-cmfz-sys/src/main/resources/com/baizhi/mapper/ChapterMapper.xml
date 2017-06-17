@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.ChapterMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Chapter">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="csize" jdbcType="VARCHAR" property="csize" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="createDate" jdbcType="DATE" property="createdate" />
+    <association property="album" javaType="album"
+                 select="com.baizhi.dao.AlbumMapper.selectByPrimaryKey" column="pid"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, url, csize, pid, duration, createDate
+  </sql>
+
+  <select id="selectByAlbum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id,title,url,csize,pid,duration,createDate
+    from cm_chapter
+    where pid=#{id}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id,title,url,csize,pid,duration,createDate
+    from cm_chapter
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_chapter
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_chapter
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.Chapter">
+    insert into cm_chapter (id, title, url, csize, pid, duration, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{csize,jdbcType=VARCHAR}, #{album.id,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
+      #{createdate,jdbcType=DATE})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Chapter">
+    update cm_chapter
+    set title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      csize = #{csize,jdbcType=VARCHAR},
+      pid = #{album.id,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

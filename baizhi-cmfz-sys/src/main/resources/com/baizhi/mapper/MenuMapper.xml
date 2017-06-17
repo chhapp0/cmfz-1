@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.MenuMapper">
+
+  <resultMap type="Menu" id="menumap">
+    <id property="id"  column="first_id"/>
+    <result property="name" column="first_name"/>
+    <result property="iconCls" column="first_iconCls"/>
+    <result property="href" column="first_href"/>
+    <collection property="menus" ofType="Menu">
+      <id property="id"  column="second_id"/>
+      <result property="name" column="second_name"/>
+      <result property="iconCls" column="second_iconCls"/>
+      <result property="href" column="second_href"/>
+    </collection>
+  </resultMap>
+  <select id="selectAll" resultMap="menumap">
+    select t1.id as first_id ,t1.name as first_name ,t1.iconCls as first_iconCls,t1.href as first_href,
+    t2.id as second_id ,t2.name as second_name ,t2.iconCls as second_iconCls,t2.href as second_href
+    from cm_menu t1 ,cm_menu t2 where t1.id=t2.mid
+  </select>
+
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.WorkMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Work">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="createD
+    ate" jdbcType="DATE" property="createdate" />
+    <association property="user" javaType="user"
+                 select="com.baizhi.dao.UserMapper.selectByPrimaryKey" column="uid"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, category, uid, createDate
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id,category,uid,createDate
+    from cm_work
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_work
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_work
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.Work">
+    insert into cm_work (id, category, uid, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{user.id,jdbcType=VARCHAR},
+      #{createdate,jdbcType=DATE})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Work">
+    update cm_work
+    set category = #{category,jdbcType=VARCHAR},
+      uid = #{user.id,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

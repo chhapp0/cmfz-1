@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.GuruMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Guru">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="head" jdbcType="VARCHAR" property="head" />
+  </resultMap>
+
+  <resultMap id="guruMap" type="com.baizhi.entity.Guru">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="head" jdbcType="VARCHAR" property="head" />
+    <collection property="users" javaType="java.util.List" ofType="user"
+                select="com.baizhi.dao.UserMapper.selectByGuru" column="id"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, head
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id,name,head
+    from cm_guru
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_guru
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_guru
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.Guru">
+    insert into cm_guru (id, name, head
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Guru">
+    update cm_guru
+    set name = #{name,jdbcType=VARCHAR},
+      head = #{head,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
