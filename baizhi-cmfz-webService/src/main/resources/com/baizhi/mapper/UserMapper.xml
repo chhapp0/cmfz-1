@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.UserMapper">
+
+  <resultMap id="userMap" type="com.baizhi.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="farmington" jdbcType="VARCHAR" property="farmington" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <association column="tid" javaType="guru" property="guru" select="com.baizhi.dao.GuruMapper.selectByPrimaryKey" />
+    <association column="pid" javaType="province" property="province" select="com.baizhi.dao.ProvinceMapper.selectByPrimaryKey" />
+    <association column="cid" javaType="city" property="city" select="com.baizhi.dao.CityMapper.selectByPrimaryKey" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="farmington" jdbcType="VARCHAR" property="farmington" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nickname, farmington, gender, description, phone, salt, pwd, photo, tid, pid,
+    cid
+  </sql>
+  
+  <select id="selectAll" resultMap="userMap">
+    select
+    <include refid="Base_Column_List" />
+    from cm_user
+  </select>
+
+  <select id="selectByPhone" parameterType="String" resultMap="userMap">
+    select
+    <include refid="Base_Column_List" />
+    from cm_user
+    where phone=#{phone}
+
+  </select>
+
+  <select id="selectByGuru" resultMap="BaseResultMap" parameterType="String">
+    select id, nickname, farmington, gender, description, phone, salt, pwd, photo, tid, pid,
+    cid
+    from cm_user
+    where tid=#{tid}
+
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="userMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.User">
+    insert into cm_user (id, nickname, farmington, 
+      gender, description, phone, 
+      salt, pwd, photo, tid, 
+      pid, cid)
+    values (#{id,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{farmington,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{guru.id,jdbcType=VARCHAR},
+      #{province.id,jdbcType=VARCHAR}, #{city.id,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.User">
+    update cm_user
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      farmington = #{farmington,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      tid = #{guru.id,jdbcType=VARCHAR},
+      pid = #{province.id,jdbcType=VARCHAR},
+      cid = #{city.id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

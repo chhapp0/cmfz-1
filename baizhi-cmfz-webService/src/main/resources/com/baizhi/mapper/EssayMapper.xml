@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.EssayMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Essay">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="pubDate" jdbcType="DATE" property="pubdate" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+  </resultMap>
+
+  <resultMap id="essayMap" type="com.baizhi.entity.Essay">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="pubDate" jdbcType="DATE" property="pubdate" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <association property="guru" javaType="guru"
+                 select="com.baizhi.dao.GuruMapper.selectByPrimaryKey" column="tid"/>
+  </resultMap>
+
+
+
+
+  <sql id="Base_Column_List">
+    id, title, flag, pubDate, tid, link
+  </sql>
+
+  <select id="selectAll" resultMap="essayMap">
+    SELECT id,title,flag,pubDate,tid,link
+    from cm_essay
+  </select>
+  <select id="selectByGuru" resultMap="BaseResultMap">
+    SELECT id,title,flag,pubDate,tid,link
+    from cm_essay
+    where tid=#{tid}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_essay
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_essay
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.Essay">
+    insert into cm_essay (id, title, flag, 
+      pubDate, tid, link)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
+      #{pubdate,jdbcType=DATE}, #{guru.id,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Essay">
+    update cm_essay
+    set title = #{title,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      pubDate = #{pubdate,jdbcType=DATE},
+      tid = #{guru.id,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

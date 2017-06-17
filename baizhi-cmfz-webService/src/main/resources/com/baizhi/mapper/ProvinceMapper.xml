@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.ProvinceMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Province">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <collection property="citys" javaType="java.util.List" ofType="city"
+                select="com.baizhi.dao.CityMapper.selectByProvince" column="id"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pname
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id,pname
+    from cm_province
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_province
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cm_province
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.entity.Province">
+    insert into cm_province (id, pname)
+    values (#{id,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Province">
+    update cm_province
+    set pname = #{pname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
