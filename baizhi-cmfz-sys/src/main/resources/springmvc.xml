@@ -18,10 +18,22 @@
 
     <!--配置处理器适配器  处理器映射器-->
     <mvc:annotation-driven>
+
+        <!--@responseBody(jackson  fastjson)注解  解决循环检测问题-->
         <mvc:message-converters>
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="features">
+                    <list>
+                        <value>DisableCircularReferenceDetect</value>
+                    </list>
+                </property>
+            </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+
+
+
 
     <!--处理静态资源拦截器-->
     <mvc:default-servlet-handler/>

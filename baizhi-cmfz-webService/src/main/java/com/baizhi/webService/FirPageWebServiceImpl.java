@@ -22,9 +22,9 @@ public class FirPageWebServiceImpl implements FirPageWebService {
     private FirPageService firPageService;
 
     @GET
-    @Path("/showFir")
+    @Path("/showFir/{uid}/{type}/{sub_type}")
     @Produces("application/json;charset=utf-8")
-    public FirPageDATE showFir(String uid, String type, String sub_type) {
+    public FirPageDATE showFir(@PathParam("uid") String uid,@PathParam("type") String type,@PathParam("sub_type") String sub_type) {
         return firPageService.makeFirPage(uid,type,sub_type );
     }
 

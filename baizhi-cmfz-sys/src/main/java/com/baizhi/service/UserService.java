@@ -5,6 +5,7 @@ import com.baizhi.entity.User;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,5 +33,9 @@ public interface UserService {
 
     //查询一个用户
     public User selectOne(String id);
+
+    //查询某个时间段的注册的数量
+
+    public List<Integer> registCount();
 
 }

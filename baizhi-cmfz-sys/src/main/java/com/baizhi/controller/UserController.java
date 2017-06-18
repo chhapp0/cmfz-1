@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by Lenovo on 2017/6/15.
@@ -75,11 +73,11 @@ public class UserController {
         user.setPhoto(webapps + "\\files\\"+newName+contentType.split("/")[1]);
         userService.addUser(user);
     }
-    @RequestMapping("deleteUser")
+    @RequestMapping("/deleteUser")
     public  void deleteUser(String id){
         userService.deleteUser(id);
     }
-    @RequestMapping("updateUser")
+    @RequestMapping("/updateUser")
     public void updateUser(User user, MultipartFile pic, HttpServletRequest request) throws IOException {
 
 
@@ -104,8 +102,22 @@ public class UserController {
         pic.transferTo(new File(webapps + "/files",newName+contentType.split("/")[1]));
         user.setPhoto(webapps + "\\files\\"+newName+contentType.split("/")[1]);
         userService.updateUser(user);
-
     }
 
+    @ResponseBody
+    @RequestMapping("/registCount")
+    public Map<String ,Object> registCount(){
+        List<Integer> integers = userService.registCount();
+        HashMap<String ,Object> hashMap = new HashMap<String, Object>();
+        hashMap.put("counts",integers);
+        ArrayList<String> strings = new ArrayList<String>();
+        strings.add("一周内");
+        strings.add("一月内");
+        strings.add("一季度内");
+        strings.add("半年内");
+        strings.add("一年内");
+        hashMap.put("dates",strings);
+        return hashMap;
+    }
 
 }

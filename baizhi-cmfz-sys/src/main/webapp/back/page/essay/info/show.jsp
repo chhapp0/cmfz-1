@@ -23,9 +23,9 @@
                     {title:"名称",field:"title",width:200,align:'center'},
                     {title:"标记",field:"flag",width:200,align:'center'},
                     {title:"发布时间",field:"pubdate",width:200,align:'center'},
-                    {title:"上师",field:"flag",width:200,align:'center',
+                    {title:"上师",field:"guru",width:200,align:'center',
                         formatter:function (value,row,index) {
-                            return  "<span>"+row.guru+"</span>"
+                            return  "<span>"+row.guru.name+"</span>"
                         }
                     },
                     {title:"文章路径",field:"link",width:200,align:'center'},
@@ -73,7 +73,7 @@
             $da.dialog({
                 width:600,
                 height:300,
-                title:"请填写轮播图的信息",
+                title:"请填写文章信息",
                 iconCls:"icon-man",
                 href:'/baizhi-cmfz-sys/back/page/essay/info/add.jsp',
                 buttons:[{
@@ -95,7 +95,7 @@
             $da.dialog({
                 width:1000,
                 height:500,
-                title:"轮播图信息",
+                title:"文章信息",
                 iconCls:"icon-man",
                 href:'${pageContext.request.contextPath}/back/page/essay/info/edit.jsp?id='+id,
                 buttons:[{

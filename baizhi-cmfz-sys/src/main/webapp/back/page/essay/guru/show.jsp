@@ -67,7 +67,7 @@
             $da.dialog({
                 width:600,
                 height:300,
-                title:"请填写轮播图的信息",
+                title:"请填写上师信息",
                 iconCls:"icon-man",
                 href:'/baizhi-cmfz-sys/back/page/essay/guru/add.jsp',
                 buttons:[{
@@ -89,7 +89,7 @@
             $da.dialog({
                 width:1000,
                 height:500,
-                title:"轮播图信息",
+                title:"上师信息",
                 iconCls:"icon-man",
                 href:'${pageContext.request.contextPath}/back/page/essay/guru/edit.jsp?id='+id,
                 buttons:[{
@@ -110,7 +110,7 @@
         //修改
         function upGuru(){
             $("#editGuruForm").form('submit',{
-                url:'/baizhi-cmfz-sys/guru/update',
+                url:'/baizhi-cmfz-sys/guru/updateGuru',
                 success:function(){
                     $da.dialog('close',true);
                     $dg.datagrid('reload');

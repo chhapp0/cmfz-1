@@ -10,7 +10,7 @@
     <!--rest 发布 restFul的webService
         address="" 代表restFul 的服务总地址
         serviceClass 服务类接口的权限定名
-        访问restFul的地址 http://localhost:8989/项目名/web.xml配置/address/类上的path/方法的path/参数-->
+            访问restFul的地址 http://localhost:8989/项目名/web.xml配置/address/类上的path/方法的path/参数-->
 
 
     <jaxrs:server address="/fir" serviceClass="com.baizhi.webService.FirPageWebService">

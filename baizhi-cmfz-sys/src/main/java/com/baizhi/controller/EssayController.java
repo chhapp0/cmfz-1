@@ -30,6 +30,7 @@ public class EssayController {
     @RequestMapping("/showAll")
     @ResponseBody
     public Split<Essay> showAll(Integer page,Integer rows){
+
         Split<Essay> essaySplit = essayService.selectAll(page, rows);
         return essaySplit;
     }
@@ -43,8 +44,6 @@ public class EssayController {
 
     @RequestMapping("/addEssay")
     public void addEssay(Essay essay, HttpServletRequest request, MultipartFile tex) throws IOException {
-
-        System.out.println("contorller++++++++++++"+essay);
 
         // 获取当前时间
         Date date = new Date();

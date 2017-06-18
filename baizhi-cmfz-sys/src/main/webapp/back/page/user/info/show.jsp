@@ -21,27 +21,27 @@
                 columns:[[
                     {title:"编号",field:"id",width:220,align:'center'},
                     {title:"昵称",field:"nickname",width:200,align:'center'},
-                    {title:"法名",field:"farmington",width:300,align:'center'},
+                    {title:"法名",field:"farmington",width:200,align:'center'},
                     {title:"性别",field:"gender",width:50,align:'center'},
-                    {title:"签名",field:"description",width:50,align:'center'},
-                    {title:"手机",field:"phone",width:50,align:'center'},
+                    {title:"签名",field:"description",width:250,align:'center'},
+                    {title:"手机",field:"phone",width:100,align:'center'},
                     {title:"头像",field:"photo",width:50,align:'center'},
-                    {title:"上师",field:"guruName",width:50,align:'center',
+                    {title:"上师",field:"guruName",width:100,align:'center',
                         formatter:function (value,row,index) {
-                            return  "<span>"+row.guru+"</span>"
+                            return  "<span>"+row.guru.name+"</span>"
                         }
                     },
-                    {title:"省份",field:"provinceName",width:50,align:'center',
+                   {title:"省份",field:"provinceName",width:100,align:'center',
                         formatter:function (value,row,index) {
-                            return  "<span>"+row.province+"</span>"
+                            return  "<span>"+row.province.pname+"</span>"
                         }
                     },
-                    {title:"城市",field:"cityName",width:50,align:'center',
+                    {title:"城市",field:"cityName",width:100,align:'center',
                         formatter:function (value,row,index) {
-                            return  "<span>"+row.city+"</span>"
+                            return  "<span>"+row.city.name+"</span>"
                         }
                     },
-                    {title:"操作",field:"options",width:250,align:'center',
+                    {title:"操作",field:"options",width:200,align:'center',
                         formatter:function(value,row,index){
                             return  "<a class='del' onClick=\"del('"+ row.id +"')\" href='javascript:;'>删除</a>&nbsp;&nbsp;" +
                                     "<a class='edit' onClick=\"editRow('"+ row.id +"')\"  href='javascript:;'>修改</a>";
@@ -84,7 +84,7 @@
             $da.dialog({
                 width:600,
                 height:300,
-                title:"请填写轮播图的信息",
+                title:"用户信息",
                 iconCls:"icon-man",
                 href:'/baizhi-cmfz-sys/back/page/user/info/add.jsp',
                 buttons:[{
@@ -106,7 +106,7 @@
             $da.dialog({
                 width:600,
                 height:300,
-                title:"轮播图信息",
+                title:"用户信息",
                 iconCls:"icon-man",
                 href:'${pageContext.request.contextPath}/back/page/user/info/edit.jsp?id='+id,
                 buttons:[{
@@ -128,6 +128,7 @@
         function upUser(){
             $("#editUserForm").form('submit',{
                 url:'/baizhi-cmfz-sys/user/updateUser',
+                contentType:false,
                 success:function(){
                     $da.dialog('close',true);
                     $dg.datagrid('reload');
@@ -139,6 +140,7 @@
         function saveUser(){
             $("#addUserForm").form('submit',{
                 url:'/baizhi-cmfz-sys/user/addUser',
+                contentType:false,
                 success:function(){
                     $da.dialog('close',true);
                     $dg.datagrid('reload');

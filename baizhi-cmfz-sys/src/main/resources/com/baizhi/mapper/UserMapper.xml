@@ -12,6 +12,8 @@
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="createDate" jdbcType="VARCHAR" property="createDate" />
+
     <association column="tid" javaType="guru" property="guru" select="com.baizhi.dao.GuruMapper.selectByPrimaryKey" />
     <association column="pid" javaType="province" property="province" select="com.baizhi.dao.ProvinceMapper.selectByPrimaryKey" />
     <association column="cid" javaType="city" property="city" select="com.baizhi.dao.CityMapper.selectByPrimaryKey" />
@@ -27,11 +29,18 @@
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="createDate" jdbcType="VARCHAR" property="createDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, nickname, farmington, gender, description, phone, salt, pwd, photo, tid, pid,
+    id, nickname, farmington, gender, description, phone, salt, pwd, photo,createDate, tid, pid,
     cid
   </sql>
+
+  <select id="registCount" resultType="java.lang.Integer" >
+    select count(id)
+    from cm_user
+    where createDate BETWEEN #{beforeDate} and #{nowDate}
+  </select>
   
   <select id="selectAll" resultMap="userMap">
     select
@@ -40,7 +49,7 @@
   </select>
 
   <select id="selectByGuru" resultMap="BaseResultMap" parameterType="String">
-    select id, nickname, farmington, gender, description, phone, salt, pwd, photo, tid, pid,
+    select id, nickname, farmington, gender, description, phone, salt, pwd, photo,createDate, tid, pid,
     cid
     from cm_user
     where tid=#{tid}
@@ -60,11 +69,11 @@
   <insert id="insert" parameterType="com.baizhi.entity.User">
     insert into cm_user (id, nickname, farmington, 
       gender, description, phone, 
-      salt, pwd, photo, tid, 
+      salt, pwd, photo,createDate, tid,
       pid, cid)
     values (#{id,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{farmington,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{guru.id,jdbcType=VARCHAR},
+      #{salt,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},#{createDate} ,#{guru.id,jdbcType=VARCHAR},
       #{province.id,jdbcType=VARCHAR}, #{city.id,jdbcType=VARCHAR})
   </insert>
 
@@ -78,6 +87,7 @@
       salt = #{salt,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
+      createDate = #{createDate}
       tid = #{guru.id,jdbcType=VARCHAR},
       pid = #{province.id,jdbcType=VARCHAR},
       cid = #{city.id,jdbcType=VARCHAR}

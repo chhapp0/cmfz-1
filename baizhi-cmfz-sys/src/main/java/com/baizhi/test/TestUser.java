@@ -36,14 +36,21 @@ public class TestUser {
         province.setId("1");
         City city = new City();
         city.setId("1");
-        userService.addUser(new User(null,"xiaoming","daming","男","qinaming","32165498778",null,"123456","asdsad",guru,province,city,null));
+        userService.addUser(new User());
 
     }
 
     @Test
     public void testSelect(){
-        System.out.println(userService.selectOne("da56b17a-e9f1-4d47-9ce6-1e67f899a4ce"));
-        System.out.println(userService.selectAll(1,10).getRows().get(4));
+        //System.out.println(userService.selectOne("da56b17a-e9f1-4d47-9ce6-1e67f899a4ce"));
+        //System.out.println(userService.selectAll(1,10).getRows().get(4));
+        Split<User> userSplit = userService.selectAll(1, 10);
+        List<User> rows = userSplit.getRows();
+        for (User row : rows) {
+            System.out.println(row);
+        }
+       // System.out.println(userSplit);
+
     }
 
 

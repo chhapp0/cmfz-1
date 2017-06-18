@@ -16,41 +16,21 @@
         $(function () {
             //富文本编辑器
             KindEditor.ready(function(K) {
-                editor = K.create("#editor", {
-                    themeType:"simple",//修改主题
-                    height: "600px",
-                    items: [
-                        "source",
-                        "preview","fullscreen","clearhtml","|",
-                        "undo", "redo","|",
-                        "copy", "paste","plainpaste", "wordpaste",
-                        "|",
-                        "justifycenter", "justifyright",
-                        "justifyfull", "insertorderedlist",
-                        "insertunorderedlist", "indent", "outdent", "|",
-                        "formatblock", "fontname", "fontsize",
-                        "forecolor", "hilitecolor", "bold",
-                        "italic", "underline", "strikethrough",
-                        "lineheight", "removeformat", "|", "image","table", "hr",
-                        "emoticons", "baidumap", "pagebreak",
-                        "anchor", "link", "unlink"
-                    ],
+                editor = KindEditor.create("#txt", {
+                    // themeType: "simple",//修改主题
+                    width:600,
+                    minwidth:600,
+                    items: [ "source", "preview","fullscreen","clearhtml", "undo", "redo","/", "copy", "paste","plainpaste", "wordpaste", "|", "justifycenter", "justifyright", "justifyfull", "insertorderedlist", "insertunorderedlist", "indent", "outdent", "|", "formatblock", "fontname", "fontsize", "forecolor", "hilitecolor", "bold", "italic", "underline", "strikethrough", "lineheight", "removeformat", "|", "image","table", "hr", "emoticons", "baidumap", "pagebreak", "anchor", "link", "unlink" ],
                     langType: 'zh_CN',
                     syncType: "form",
                     filterMode: false,
                     pagebreakHtml: '<hr class="pageBreak" \/>',
                     allowFileManager: true,
                     filePostName: "image",
-
-
-                    fileManagerJson:"",
-                    uploadJson:"",
-
-
-                    extraFileUploadParams: {
-                        token: getCookie("token")
-                    },
-                    afterChange: function() {
+                    fileManagerJson: "${pageContext.request.contextPath }/imgs/browser",
+                    uploadJson: "${pageContext.request.contextPath }/imgs/uploadImg",
+                    extraFileUploadParams: { token: getCookie("token") },
+                    afterChange: function () {
                         this.sync();
                     }
                 });

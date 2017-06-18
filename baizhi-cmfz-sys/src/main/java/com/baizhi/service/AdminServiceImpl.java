@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 
 import java.util.UUID;
 
@@ -27,7 +28,6 @@ public class AdminServiceImpl implements AdminService {
     public Admin login(Admin admin) {
 
         Admin dbAdmin = adminMapper.selectByUserName(admin.getUsername());
-
         if (dbAdmin==null){
             throw new RuntimeException("用户不存在");
         }else if(!MD5Utils.getMD5(admin.getPassword()+dbAdmin.getSalt()).equals(dbAdmin.getPassword())){
@@ -45,7 +45,6 @@ public class AdminServiceImpl implements AdminService {
         admin.setSalt(SaltUtil.getSalt(8));
         admin.setPassword(MD5Utils.getMD5(admin.getPassword()+admin.getSalt()));
         System.out.println(admin);
-
         adminMapper.insert(admin);
     }
 }

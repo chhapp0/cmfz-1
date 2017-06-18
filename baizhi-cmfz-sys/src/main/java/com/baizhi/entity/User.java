@@ -1,5 +1,9 @@
 package com.baizhi.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 import java.util.List;
 
 public class User {
@@ -21,6 +25,10 @@ public class User {
 
     private String photo;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
+    private Date createDate;
+
     private Guru guru;//上师
 
     private Province province;//省份
@@ -28,6 +36,10 @@ public class User {
     private City city;
 
     private List<Work> works;
+
+    public User() {
+        super();
+    }
 
     @Override
     public String toString() {
@@ -41,15 +53,12 @@ public class User {
                 ", salt='" + salt + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", photo='" + photo + '\'' +
+                ", createDate=" + createDate +
                 ", guru=" + guru +
                 ", province=" + province +
                 ", city=" + city +
                 ", works=" + works +
                 '}';
-    }
-
-    public User() {
-        super();
     }
 
     public String getId() {
@@ -124,6 +133,14 @@ public class User {
         this.photo = photo;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     public Guru getGuru() {
         return guru;
     }
@@ -156,7 +173,7 @@ public class User {
         this.works = works;
     }
 
-    public User(String id, String nickname, String farmington, String gender, String description, String phone, String salt, String pwd, String photo, Guru guru, Province province, City city, List<Work> works) {
+    public User(String id, String nickname, String farmington, String gender, String description, String phone, String salt, String pwd, String photo, Date createDate, Guru guru, Province province, City city, List<Work> works) {
 
         this.id = id;
         this.nickname = nickname;
@@ -167,6 +184,7 @@ public class User {
         this.salt = salt;
         this.pwd = pwd;
         this.photo = photo;
+        this.createDate = createDate;
         this.guru = guru;
         this.province = province;
         this.city = city;
