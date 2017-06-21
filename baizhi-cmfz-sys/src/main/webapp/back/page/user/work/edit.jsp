@@ -4,7 +4,6 @@
         <div style="margin-top: 70px;">
             <input type="hidden" value="${param.id}" name="id">
             功课:<input name="category" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"/><br/>
-            <input type="hidden" value="${param.work.id}" name="work.id">
             创建时间:<input name="createdate" readonly="readonly" class="easyui-textbox" data-options="required:true,iconCls:'icon-man'"/><br/>
         </div>
     </form>

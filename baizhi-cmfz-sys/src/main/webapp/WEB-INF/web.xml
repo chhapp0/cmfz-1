@@ -10,6 +10,20 @@
     <param-value>classpath:spring-basic.xml</param-value>
   </context-param>
 
+  <!-- shiroFilter
+  		作用:就是拦截所有请求  拦截到的所有请求转发工厂中一个与FilterMame配置一致的beanid去处理
+   -->
+  <filter>
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
   <!--编码的filter-->
   <filter>
     <filter-name>characterEncodingFilter</filter-name>

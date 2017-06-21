@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" language="java" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <title>Title</title>
@@ -30,6 +31,7 @@
                     $.each(menu.menus,function(j,child){
                        // console.log(child);
                        // console.log(JSON.stringify(child));//将js中的js对象转为js中的字符串
+
                         content +="<div onclick=\"addTabs('"+child.name+"','"+child.iconCls+"','"+child.href+"')\" class='easyui-linkbutton' data-options=\"plain:true,iconCls:'"+child.iconCls+"'\" style='border:1px solid green; width:90%;margin: 5 0 5 0 ;'>"+child.name+"</div>";
                     })
                     content +="</div>";
@@ -47,9 +49,7 @@
 
         //添加选项卡
         function  addTabs(title,iconCls,href){
-            console.log(title);
-            console.log(iconCls);
-            console.log(href);
+
             if(!$tt.tabs('exists',title)){
                 $tt.tabs('add',{
                     title:title,
@@ -70,7 +70,9 @@
 </head>
 <body class="easyui-layout">
 
-        <div data-options="region:'north',split:false" style="height:100px;"></div>
+        <div data-options="region:'north',split:false" style="height:100px;">
+            <h1>欢迎：<shiro:principal/>       <a href="/baizhi-cmfz-sys/admin/logout">注销</a> </h1>
+        </div>
 
         <div data-options="region:'south',split:false" style="height:40px;"></div>
 

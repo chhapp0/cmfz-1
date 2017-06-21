@@ -23,7 +23,7 @@
                     {title:"功课",field:"category",width:200,align:'center'},
                     {title:"所属用户",field:"uid",width:250,align:'center',
                         formatter:function (value,row,index) {
-                            return "<span>"+row.user+"</span>"
+                            return "<span>"+row.user.nickname+"</span>"
                         }
                     },
                     {title:"创建时间",field:"createdate",width:150,align:'center'},

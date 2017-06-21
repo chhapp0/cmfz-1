@@ -1,7 +1,6 @@
 package com.baizhi.test;
 
-import com.baizhi.dao.ChapterMapper;
-import com.baizhi.entity.Chapter;
+import com.baizhi.service.WorkService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,26 +8,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Created by Lenovo on 2017/6/14.
+ * Created by Lenovo on 2017/6/21.
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-basic.xml")
-public class TestChapter {
-
+public class TestWork {
     @Autowired
-    private ChapterMapper chapterMapper;
+    private WorkService workService;
 
     @Test
     public void testSelectAll(){
-        System.out.println(chapterMapper.selectByPrimaryKey("1"));
-
-    }
-
-    @Test
-    public void testSelectByAlbum(){
-        System.out.println(chapterMapper.selectByAlbum("8417131f-e65c-46a4-8104-96020bc5b41a"));
-
+        System.out.println(workService.selectAll(1,1).getRows().get(0));
     }
 
 

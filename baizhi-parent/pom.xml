@@ -11,6 +11,7 @@
     <modules>
         <module>../baizhi-cmfz-sys</module>
         <module>../baizhi-cmfz-webService</module>
+        <module>../webService_httpClient</module>
     </modules>
     <dependencies>
         <dependency>
@@ -178,7 +179,25 @@
             <artifactId>cxf-rt-rs-service-description</artifactId>
             <version>3.1.6</version>
         </dependency>
+        <!-- shiro 核心 以及依赖jar -->
 
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>1.2.5</version>
+        </dependency>
 
 
     </dependencies>

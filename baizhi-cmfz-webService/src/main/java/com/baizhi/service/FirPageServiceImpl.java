@@ -8,14 +8,17 @@ import com.baizhi.entity.*;
 import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Lenovo on 2017/6/16.
  */
 @Service
+@Transactional
 public class FirPageServiceImpl implements FirPageService {
 
     //专辑
@@ -135,6 +138,34 @@ public class FirPageServiceImpl implements FirPageService {
 
     public User selectByPhone(String phone) {
         User user = userMapper.selectByPhone(phone);
+        return user;
+    }
+
+    public Album selecetOneAlbum(String uid,String id) {
+
+        Album album = albumMapper.selectByPrimaryKey(id);
+
+        return album;
+    }
+
+    public User login(String phone, String password) {
+
+        User user = userMapper.selectByPhone(phone);
+        if (user!=null){//手机号码存在
+            if (password.equals(user.getPwd())){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    //注册
+    public User regist(String phone, String password) {
+        User user = new User();
+        user.setId(UUID.randomUUID().toString());
+        user.setPhone(phone);
+        user.setPwd(password);
+        userMapper.insert(user);
         return user;
     }
 

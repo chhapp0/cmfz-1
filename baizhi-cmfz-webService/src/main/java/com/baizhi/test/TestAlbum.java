@@ -1,7 +1,6 @@
 package com.baizhi.test;
 
 import com.baizhi.dao.AlbumMapper;
-import com.baizhi.service.AlbumService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +17,10 @@ public class TestAlbum {
 
     @Autowired
     private AlbumMapper albumMapper;
-    @Autowired
-    private AlbumService albumService;
+
 
     @Test
-    public void testSelectAll(){
-        System.out.println(albumService.selectOne("8417131f-e65c-46a4-8104-96020bc5b41a"));
-    }
-    @Test
     public void testSelectById(){
-        System.out.println(albumService.selectOne("ae7e4af6-4ccf-4be1-b4a1-766d4d437189"));
         System.out.println(albumMapper.selectByPrimaryKey("ae7e4af6-4ccf-4be1-b4a1-766d4d437189"));
     }
 }

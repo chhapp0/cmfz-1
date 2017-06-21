@@ -11,8 +11,9 @@
     <result column="createDate" jdbcType="DATE" property="createdate" />
     <result column="brief" jdbcType="VARCHAR" property="brief" />
     <collection property="chapters" javaType="java.util.List" ofType="chapter"
-                select="com.baizhi.dao.ChapterMapper.selectByAlbum" column="pid"/>
+                select="com.baizhi.dao.ChapterMapper.selectByAlbum" column="id"/>
   </resultMap>
+
 
 
   <sql id="Base_Column_List">
@@ -41,7 +42,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.baizhi.entity.Album">
-    insert into cm_album (id, thumbnail, title, 
+    insert into cm_album (id, thumbnail, title,
       score, author, broadcast, 
       createDate, brief)
       values (#{id,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},

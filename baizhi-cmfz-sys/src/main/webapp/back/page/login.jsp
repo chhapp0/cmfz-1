@@ -16,9 +16,14 @@
                 onClick:subForm,
             })
         })
-        function subForm() {
+
+
+
+
+       function subForm() {
             $("#ff").form('submit',{
                 url:'/baizhi-cmfz-sys/admin/login',
+
                 success:function(date){
                     var a= eval('('+date+')');
                     if(a.temp){
@@ -27,11 +32,12 @@
                 }
             })
         }
+
     </script>
 </head>
 <body style=" background-image: url(/baizhi-cmfz-sys/back/img/29054-106.jpg);">
 
-    <form method="get" id="ff" >
+    <form action="/baizhi-cmfz-sys/admin/login" method="get" id="ff" >
         <div id="w" style="width:400px;padding:150px 70px 20px 70px;margin-left:700px;;margin-right: auto;border:transparent solid 1px;background-color:transparent";>
             <div style="text-align: center;height:88px;">
                 <p  style="font-size: 50px; font-family: 'Adobe Caslon Pro Bold'; color:#b83400;">持明法洲</p><br><br>
@@ -43,16 +49,16 @@
                 <div style="margin-bottom:20px">
                     <input class="easyui-textbox" name="password" id="logpass" type="password" style="width:100%;height:30px;padding:12px;" data-options="prompt:'登录密码',required:true,iconCls:'icon-lock',iconWidth:38">
                 </div>
-                <div style="margin-bottom:20px">
+               <%-- <div style="margin-bottom:20px">
                     <input type="checkbox" checked="checked" id="logrem">
                     <span>记住密码</span>
-                </div>
+                </div>--%>
                 <div>
-                    <a href="javascript:;" id="btn" class="easyui-linkbutton" data-options="text:'登录',iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
+                    <a href="javascript:;"  id="btn" class="easyui-linkbutton" data-options="text:'登录',iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
 
                     </a><br><br>
                     <%--<input type="submit" value="提交"/>--%>
-                    <a href="javascript:;" onclick="" class="easyui-linkbutton" data-options="text:'注册',iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
+                    <%--<a href="javascript:;" onclick="" class="easyui-linkbutton" data-options="text:'注册',iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">--%>
 
                     </a>
                 </div>

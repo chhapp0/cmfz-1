@@ -1,15 +1,15 @@
 package com.baizhi.webService;
 
+import com.baizhi.entity.Album;
 import com.baizhi.entity.FirPageDATE;
 import com.baizhi.entity.User;
 import com.baizhi.service.FirPageService;
 
 import javax.annotation.Resource;
 import javax.jws.WebService;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Lenovo on 2017/6/16.
@@ -28,17 +28,67 @@ public class FirPageWebServiceImpl implements FirPageWebService {
         return firPageService.makeFirPage(uid,type,sub_type );
     }
 
+
+
     @GET
-    @Path("/login")
+    @Path("/showAlbum/{uid}/{id}/")
     @Produces("application/json;charset=utf-8")
-    //参数密码为md5后的
-    public User login(String phone, String password) {
-        User user = firPageService.selectByPhone(phone);
-        if (user.getPwd().equals(password)){
-            return user;
-        }
-        return null;
+    public Album showAlbum(@PathParam("uid") String uid,@PathParam("id") String id) {
+
+        Album album = firPageService.selecetOneAlbum(uid, id);
+        return album;
     }
 
 
+    @POST
+    @Path("/login/{phone}/{password}/")
+    @Produces("application/json;charset=utf-8")
+    //参数密码为md5后的
+    public HashMap<String ,String > login(@PathParam("phone") String phone,@PathParam("password") String password) {
+        User user = firPageService.selectByPhone(phone);
+        HashMap<String, String> map = new HashMap<String, String>();
+        if (user!=null){
+            if (user.getPwd().equals(password)){
+                map.put("password",user.getPwd());
+                map.put("farmington",user.getFarmington());
+                map.put("uid",user.getId());
+                map.put("nickname",user.getNickname());
+                map.put("gender",user.getGender());
+                map.put("photo",user.getPhoto());
+                map.put("province",user.getProvince().getPname());
+                map.put("city",user.getCity().getName());
+                map.put("description",user.getDescription());
+                map.put("phone",user.getPhone());
+            }else {
+                map.put("errno","-200");
+                map.put("errmsg","密码错误");
+            }
+        }else{
+            map.put("errno","-200");
+            map.put("errmsg","账号不存在");
+        }
+
+        return map;
+    }
+
+
+
+
+    @POST
+    @Path("/showAlbum/{phone}/{password}/")
+    @Produces("application/json;charset=utf-8")
+    public HashMap<String, String> regist(@PathParam("phone") String phone,@PathParam("password") String password) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        try{
+            User regist = firPageService.regist(phone, password);
+            map.put("uid",regist.getId());
+            map.put("password",regist.getPwd());
+            map.put("phone",regist.getPhone());
+            return map;
+        }catch (Exception e){
+            map.put("errno","-200");
+            map.put("err_msg","注册失败");
+            return map;
+        }
+    }
 }

@@ -4,8 +4,7 @@
   <resultMap id="BaseResultMap" type="com.baizhi.entity.Work">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="createD
-    ate" jdbcType="DATE" property="createdate" />
+    <result column="createDate" jdbcType="DATE" property="createdate" />
     <association property="user" javaType="user"
                  select="com.baizhi.dao.UserMapper.selectByPrimaryKey" column="uid"/>
   </resultMap>
@@ -39,7 +38,7 @@
   <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Work">
     update cm_work
     set category = #{category,jdbcType=VARCHAR},
-      uid = #{user.id,jdbcType=VARCHAR},
+
       createDate = #{createdate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>

@@ -8,6 +8,16 @@
     <result column="csize" jdbcType="VARCHAR" property="csize" />
     <result column="duration" jdbcType="VARCHAR" property="duration" />
     <result column="createDate" jdbcType="DATE" property="createdate" />
+
+  </resultMap>
+
+  <resultMap id="chapterMap" type="com.baizhi.entity.Chapter">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="csize" jdbcType="VARCHAR" property="csize" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="createDate" jdbcType="DATE" property="createdate" />
     <association property="album" javaType="album"
                  select="com.baizhi.dao.AlbumMapper.selectByPrimaryKey" column="pid"/>
   </resultMap>
@@ -21,12 +31,12 @@
     where pid=#{id}
   </select>
 
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="chapterMap">
     select id,title,url,csize,pid,duration,createDate
     from cm_chapter
   </select>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="chapterMap">
     select 
     <include refid="Base_Column_List" />
     from cm_chapter
