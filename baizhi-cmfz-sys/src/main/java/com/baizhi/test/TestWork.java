@@ -21,5 +21,11 @@ public class TestWork {
         System.out.println(workService.selectAll(1,1).getRows().get(0));
     }
 
+    @Test
+    public void test1(){
+
+    }
+
+
 
 }

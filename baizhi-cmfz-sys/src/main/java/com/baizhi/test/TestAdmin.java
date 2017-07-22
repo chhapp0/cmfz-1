@@ -5,9 +5,7 @@ import com.baizhi.entity.Admin;
 import com.baizhi.service.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -34,6 +32,12 @@ public class TestAdmin {
 
         adminService.addAdmin(new Admin(null, "xiaoming", "123456", null));
         //adminMapper.insert(new Admin("2", "xiaohu", "123456", "qwe"));
+
+
+    }
+    @Test
+    public void testaaa(){
+
 
 
     }
